@@ -26,8 +26,8 @@ export default {
       const article_2 = selectedEng_2.value
       const article_1_Data = data.value.find(item_1 => item_1.Chs === article_1)
       const article_2_Data = data.value.find(item_2 => item_2.Chs === article_2)
-      const article_1_Quantity = article_1_Data.CQ
-      const article_2_Quantity = article_2_Data.CQ
+      const article_1_Quantity = article_1_Data.CQM
+      const article_2_Quantity = article_2_Data.CQM
       const article_Ratio = article_2_Quantity / article_1_Quantity
       article_ConversionQuantity.value = inputQuantity_1.value * article_Ratio
     }
