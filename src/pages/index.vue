@@ -1,6 +1,6 @@
 <script>
 import { ref } from 'vue'
-import { dataJson } from '../../public/data'
+import { dataJson } from '/public/data'
 
 export default {
   setup() {
@@ -11,10 +11,10 @@ export default {
     const article_ConversionQuantity = ref(0)
     const loading = ref(true)
     dataJson().then((res) => {
-      const filteredData = res.filter(item => item.CQM !== '')
-      data.value = filteredData
+      data.value = res
       loading.value = false
     })
+
     function triggerCalculi() {
       if (!inputQuantity_1.value || !selectedEng_2.value)
         return
@@ -72,18 +72,23 @@ export default {
         class="border-1.5 pl-2 py-2 mr-4 lt-lg:(mr-0 mb-4)" @input="triggerCalculi"
       >
       <select v-model="selectedEng_1" class="border-1.5 px-6 py-2" @change="triggerCalculi">
-        <option v-for="item_1 in data" :key="item_1.id" :value="item_1.Chs">
-          {{ item_1.Chs }}
-        </option>
+        <template v-for="item_1 in data" :key="item_1.id">
+          <option v-if="item_1.CQM" :value="item_1.Chs">
+            {{ item_1.Chs }}
+          </option>
+        </template>
       </select>
       <button
         title="物品交换" i="mdi-rotate-3d-variant" class="icon-btn text-xl px-12 lt-lg:my-5"
         @click="swapSelections"
       />
       <select v-model="selectedEng_2" class="border-1.5 px-6 py-2" @change="triggerCalculi">
-        <option v-for="item_2 in data" :key="item_2.id" :value="item_2.Chs">
-          {{ item_2.Chs }}
-        </option>
+        <template v-for="item_2 in data" :key="item_2.id">
+          <option v-if="item_2.CQM" :value="item_2.Chs">
+            {{ item_2.Chs }}
+          </option>
+          template
+        </template>
       </select>
     </div>
     <div v-if="inputQuantity_1">
