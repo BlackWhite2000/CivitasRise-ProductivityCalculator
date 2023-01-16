@@ -14,8 +14,13 @@ export default {
       data.value = res
     })
     function triggerCalculi() {
-      if (!inputQuantity_1.value || inputQuantity_1.value < 0 || !selectedEng_2.value)
+      if (!inputQuantity_1.value || !selectedEng_2.value)
         return
+      const inputValue = parseFloat(inputQuantity_1.value)
+      if (inputValue < 0) {
+        inputQuantity_1.value = 0
+        return
+      }
 
       const article_1 = selectedEng_1.value
       const article_2 = selectedEng_2.value
@@ -36,6 +41,7 @@ export default {
       triggerCalculi,
     }
   },
+
 }
 </script>
 
@@ -46,7 +52,7 @@ export default {
     </div>
     <div class="flex justify-center items-center mb-8 lt-lg:flex-col">
       <input
-        v-model="inputQuantity_1" min="0" placeholder="请输入数量" type="number" pattern="[0-9]+"
+        v-model.number="inputQuantity_1" min="0" placeholder="请输入数量" type="number" pattern="[0-9]+"
         class="border-1.5 pl-2 py-2 mr-4 lt-lg:(mr-0 mb-4)" @input="triggerCalculi"
       >
       <select v-model="selectedEng_1" class="border-1.5 px-6 py-2" @change="triggerCalculi">
