@@ -46,6 +46,7 @@ export default {
       const temp = this.selectedEng_1
       this.selectedEng_1 = this.selectedEng_2
       this.selectedEng_2 = temp
+      this.triggerCalculi()
     },
   },
 }
