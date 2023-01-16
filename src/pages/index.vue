@@ -5,8 +5,8 @@ import { dataJson } from '../../public/data'
 export default {
   setup() {
     const data = ref([])
-    const selectedEng_1 = ref('葡萄')
-    const selectedEng_2 = ref('黍')
+    const selectedEng_1 = ref('黍')
+    const selectedEng_2 = ref('葡萄')
     const inputQuantity_1 = ref()
     const article_ConversionQuantity = ref(0)
 
@@ -41,7 +41,13 @@ export default {
       triggerCalculi,
     }
   },
-
+  methods: {
+    swapSelections() {
+      const temp = this.selectedEng_1
+      this.selectedEng_1 = this.selectedEng_2
+      this.selectedEng_2 = temp
+    },
+  },
 }
 </script>
 
@@ -63,9 +69,7 @@ export default {
           {{ item_1.Chs }}
         </option>
       </select>
-      <div class="px-12 lt-lg:my-4">
-        换算
-      </div>
+      <botton title="物品交换" i="mdi-rotate-3d-variant" class="icon-btn text-xl px-12 lt-lg:my-5" @click="swapSelections" />
       <select v-model="selectedEng_2" class="border-1.5 px-6 py-2" @change="triggerCalculi">
         <option v-for="item_2 in data" :key="item_2.id" :value="item_2.Chs">
           {{ item_2.Chs }}
