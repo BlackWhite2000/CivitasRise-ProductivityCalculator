@@ -9,9 +9,11 @@ export default {
     const selectedEng_2 = ref('葡萄')
     const inputQuantity_1 = ref()
     const article_ConversionQuantity = ref(0)
-
+    const loading = ref(true)
     dataJson().then((res) => {
-      data.value = res
+      const filteredData = res.filter(item => item.CQM !== '')
+      data.value = filteredData
+      loading.value = false
     })
     function triggerCalculi() {
       if (!inputQuantity_1.value || !selectedEng_2.value)
@@ -34,6 +36,7 @@ export default {
 
     return {
       data,
+      loading,
       selectedEng_1,
       selectedEng_2,
       inputQuantity_1,
@@ -53,7 +56,10 @@ export default {
 </script>
 
 <template>
-  <div class="h-80vh flex flex-col justify-center items-center">
+  <div v-if="loading" class="loading-animation">
+    <div class="loading-spinner" />
+  </div>
+  <div v-else class="h-80vh flex flex-col justify-center items-center">
     <div class="text-xl font-bold">
       CivitasRise 产能换算器
     </div>
@@ -70,7 +76,10 @@ export default {
           {{ item_1.Chs }}
         </option>
       </select>
-      <button title="物品交换" i="mdi-rotate-3d-variant" class="icon-btn text-xl px-12 lt-lg:my-5" @click="swapSelections" />
+      <button
+        title="物品交换" i="mdi-rotate-3d-variant" class="icon-btn text-xl px-12 lt-lg:my-5"
+        @click="swapSelections"
+      />
       <select v-model="selectedEng_2" class="border-1.5 px-6 py-2" @change="triggerCalculi">
         <option v-for="item_2 in data" :key="item_2.id" :value="item_2.Chs">
           {{ item_2.Chs }}
@@ -85,7 +94,7 @@ export default {
       {{ selectedEng_2 }}
     </div>
     <div v-else>
-      <div v-if="inputQuantity_1 === 0 ">
+      <div v-if="inputQuantity_1 === 0">
         <span>
           输入框的值不允许为 0,
         </span>
@@ -112,3 +121,33 @@ export default {
     </button>
   </div>
 </template>
+
+<style>
+.loading-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #f3f3f3;
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spinner 0.6s linear infinite;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
