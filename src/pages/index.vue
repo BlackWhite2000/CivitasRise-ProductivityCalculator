@@ -47,8 +47,11 @@ export default {
 
 <template>
   <div class="h-80vh flex flex-col justify-center items-center">
-    <div class="mb-10 text-xl font-bold">
+    <div class="text-xl font-bold">
       CivitasRise 产能换算器
+    </div>
+    <div class="mt-2 mb-10 text-sm opacity-75">
+      数据来源：群文件 items.xlsx 2022-11-16
     </div>
     <div class="flex justify-center items-center mb-8 lt-lg:flex-col">
       <input
