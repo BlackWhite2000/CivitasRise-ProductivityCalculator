@@ -121,9 +121,7 @@ export default {
         的输入框里填写数量
       </div>
     </div>
-    <button class="icon-btn mx-2 !outline-none mt-12" @click="toggleDark()">
-      <div i="carbon-sun dark:carbon-moon" />
-    </button>
+    <button i="carbon-sun dark:carbon-moon" class="icon-btn mx-2 !outline-none mt-12" @click="toggleDark()" />
   </div>
 </template>
 
