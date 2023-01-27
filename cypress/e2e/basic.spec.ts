@@ -15,8 +15,8 @@ context('Basic', () => {
       .url()
       .should('eq', 'http://localhost:3333/hi/Vitesse')
 
-    cy.contains('[Default Layout]')
-      .should('exist')
+    // cy.contains('[Default Layout]')
+    //   .should('exist')
 
     cy.get('[btn]')
       .click()

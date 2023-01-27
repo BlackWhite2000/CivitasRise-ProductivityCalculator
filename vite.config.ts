@@ -103,8 +103,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
       manifest: {
-        name: 'Vitesse',
-        short_name: 'Vitesse',
+        name: '产能换算器',
+        short_name: '产能换算器',
         theme_color: '#ffffff',
         icons: [
           {
